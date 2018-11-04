@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:file:/tmp/db/candidate
+    url: jdbc:h2:./data/db/candidate
     platform: h2
     username: sa
     driver-class-name: org.h2.Driver
@@ -30,6 +30,6 @@ liquibase:
 
 info:
   app:
-    name: Candidate
+    name: Candidate.java
     creator-name: Tales Bitelo Viegas
     creator-email: tales.viegas@ulbra.br

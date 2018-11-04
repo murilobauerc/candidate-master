@@ -3,17 +3,17 @@ package br.edu.ulbra.election.candidate.input.v1;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "Candidate Input Information")
+@ApiModel(description = "Candidate.java Input Information")
 public class CandidateInput {
 
-    @ApiModelProperty(example = "John Doe", notes = "Candidate name")
+    @ApiModelProperty(example = "John Doe", notes = "Candidate.java name")
     private String name;
-    @ApiModelProperty(example = "1", notes = "Candidate Party ID")
-    private Long partyId;
-    @ApiModelProperty(example = "97654", notes = "Candidate Election Number")
-    private Long numberElection;
-    @ApiModelProperty(example = "3", notes = "Candidate Election Id")
-    private Long electionId;
+    @ApiModelProperty(example = "1", notes = "Candidate.java Party ID")
+    private int partyId;
+    @ApiModelProperty(example = "97654", notes = "Candidate.java Election Number")
+    private int numberElection;
+    @ApiModelProperty(example = "3", notes = "Candidate.java Election Id")
+    private int electionId;
 
     public String getName() {
         return name;
@@ -23,27 +23,27 @@ public class CandidateInput {
         this.name = name;
     }
 
-    public Long getPartyId() {
+    public int getPartyId() {
         return partyId;
     }
 
-    public void setPartyId(Long partyId) {
+    public void setPartyId(int partyId) {
         this.partyId = partyId;
     }
 
-    public Long getNumberElection() {
+    public int getNumberElection() {
         return numberElection;
     }
 
-    public void setNumberElection(Long numberElection) {
+    public void setNumberElection(int numberElection) {
         this.numberElection = numberElection;
     }
 
-    public Long getElectionId() {
+    public int getElectionId() {
         return electionId;
     }
 
-    public void setElectionId(Long electionId) {
+    public void setElectionId(int electionId) {
         this.electionId = electionId;
     }
 }

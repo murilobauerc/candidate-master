@@ -3,18 +3,18 @@ package br.edu.ulbra.election.candidate.output.v1;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "Candidate Output Information")
+@ApiModel(description = "Candidate.java Output Information")
 public class CandidateOutput {
 
-    @ApiModelProperty(example = "1", notes = "Candidate Unique Identification")
+    @ApiModelProperty(example = "1", notes = "Candidate.java Unique Identification")
     private Long id;
-    @ApiModelProperty(example = "John Doe", notes = "Candidate name")
+    @ApiModelProperty(example = "John Doe", notes = "Candidate.java name")
     private String name;
-    @ApiModelProperty(example = "77654", notes = "Candidate Election Number")
+    @ApiModelProperty(example = "77654", notes = "Candidate.java Election Number")
     private Long numberElection;
-    @ApiModelProperty(notes = "Candidate Election Data")
+    @ApiModelProperty(notes = "Candidate.java Election Data")
     private ElectionOutput electionOutput;
-    @ApiModelProperty(notes = "Candidate Party Data")
+    @ApiModelProperty(notes = "Candidate.java Party Data")
     private PartyOutput partyOutput;
 
     public String getName() {
