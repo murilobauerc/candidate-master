@@ -10,13 +10,12 @@ public class ValidateCandidateInput {
     private ValidateCandidateInput(){}
 
     /**
-     * Throw an generic exception if the voter's name does not contain at least 5 letters and a last name.
+     * Throw an generic exception if the candidate's name does not contain at least 5 letters and a last name.
      * @param candidateInput object which case it is the name to be searched.
      * @throws GenericOutputException if name goes wrong.
      */
     public static void validateLastCandidatesName(CandidateInput candidateInput){
-        String[] word = candidateInput.getName().trim().split(" ");
-        if(word.length < 2){
+        if(trimInsideOut(candidateInput.getName()).split(" ").length < 2){
             throw new GenericOutputException("The name must have at least a last name.");
         }
         if(trimInsideOut(candidateInput.getName()).length() < 5) {
