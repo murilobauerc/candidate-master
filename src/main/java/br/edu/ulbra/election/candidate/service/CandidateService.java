@@ -1,18 +1,20 @@
 package br.edu.ulbra.election.candidate.service;
 
+import br.edu.ulbra.election.candidate.client.ElectionClientService;
+import br.edu.ulbra.election.candidate.client.PartyClientService;
 import br.edu.ulbra.election.candidate.exception.GenericOutputException;
 import br.edu.ulbra.election.candidate.input.v1.CandidateInput;
 import br.edu.ulbra.election.candidate.model.Candidate;
-import br.edu.ulbra.election.candidate.output.v1.GenericOutput;
 import br.edu.ulbra.election.candidate.output.v1.CandidateOutput;
+import br.edu.ulbra.election.candidate.output.v1.GenericOutput;
 import br.edu.ulbra.election.candidate.repository.CandidateRepository;
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.lang.reflect.Type;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.edu.ulbra.election.candidate.util.ValidateCandidateInput.validateLastCandidatesName;
 
@@ -20,6 +22,8 @@ import static br.edu.ulbra.election.candidate.util.ValidateCandidateInput.valida
 public class CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final ElectionClientService electionClientService;
+    private final PartyClientService partyClientService;
 
     private final ModelMapper modelMapper;
 
@@ -27,23 +31,27 @@ public class CandidateService {
     private static final String MESSAGE_CANDIDATE_NOT_FOUND = "Candidate not found";
 
     @Autowired
-    public CandidateService(CandidateRepository candidateRepository, ModelMapper modelMapper){
+    public CandidateService(CandidateRepository candidateRepository, ElectionClientService electionClientService, PartyClientService partyClientService, ModelMapper modelMapper){
         this.candidateRepository = candidateRepository;
+        this.electionClientService = electionClientService;
+        this.partyClientService = partyClientService;
         this.modelMapper = modelMapper;
+
     }
 
     public List<CandidateOutput> getAll(){
-        Type candidateOutputListType = new TypeToken<List<CandidateOutput>>(){}.getType();
-        return modelMapper.map(candidateRepository.findAll(), candidateOutputListType);
+        List<Candidate> candidateList = (List<Candidate>)candidateRepository.findAll();
+        return candidateList.stream().map(Candidate::toCandidateOutput).collect(Collectors.toList());
     }
 
+
+
     public CandidateOutput create(CandidateInput candidateInput) {
-        modelMapper.getConfiguration().setAmbiguityIgnored(true);
         validateInput(candidateInput, false);
         validateLastCandidatesName(candidateInput);
         Candidate candidate = modelMapper.map(candidateInput, Candidate.class);
         candidate = candidateRepository.save(candidate);
-        return modelMapper.map(candidate, CandidateOutput.class);
+        return Candidate.toCandidateOutput(candidate);
     }
 
     public CandidateOutput getById(Long candidateId){
