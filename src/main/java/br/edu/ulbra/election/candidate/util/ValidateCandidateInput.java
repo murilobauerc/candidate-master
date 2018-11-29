@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 public class ValidateCandidateInput {
     private ValidateCandidateInput(){}
 
+
+
     /**
      * Throw an generic exception if the candidate's name does not contain at least 5 letters and a last name.
      * @param candidateInput object which case it is the name to be searched.
